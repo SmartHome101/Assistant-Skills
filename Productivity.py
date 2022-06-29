@@ -74,7 +74,7 @@ def alarm(result):
             alarm_hour == now.hour and 
             alarm_minute == now.minute ):
 
-            playsound("./alarm.mp3")
+            playsound("alarm.wav")
             break
 
 
