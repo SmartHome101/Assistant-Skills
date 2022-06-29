@@ -15,7 +15,8 @@ mapping={
         'Weather'       : Weather.weather,
         'News'          : News.news,
         'Iot'           : IOT.smartHome,
-        'Productivity'  : Productivity.productivity
+        'Datetime'      : Productivity.productivity,
+        'Reminder'      : Productivity.productivity
         } 
 
 while True:
@@ -31,6 +32,7 @@ while True:
         print(message)
 
     response = requests.post(f'http://127.0.0.1:8000/predict?message={message}').json()
+    #make a request to the server and get the response in json format then mapping the response to the function
     speak(str(mapping[response['Intent']](response)))
     time.sleep(5)
 
