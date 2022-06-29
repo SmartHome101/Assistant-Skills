@@ -5,7 +5,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 
-cred = credentials.Certificate('.\serviceAccount.json')
+cred = credentials.Certificate('serviceAccount.json')
 firebase_admin.initialize_app(cred ,{'databaseURL': 'https://smart-home-2f967-default-rtdb.firebaseio.com/'})
 ref = db.reference('/')
 users_ref= ref.child('HOME01')
