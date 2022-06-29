@@ -6,9 +6,9 @@ import Weather , News , IOT , Kitchen , Enterainment , Social , Productivity
 from TTS import speak
 
 mapping={
-        'Greeting'      : Social.greet,
-        'Goodbye'       : Social.goodbye,
-        'Thanks'        : Social.thank,
+        'Greeting'      : Social.Social,
+        'Goodbye'       : Social.Social,
+        'Thanks'        : Social.Social,
         'Joke'          : Enterainment.joke,
         'PlayMusic'     : Enterainment.play_music,
         'Cooking'       : Kitchen.cooking,
