@@ -5,11 +5,14 @@ from TTS import speak
 
 
     
-def cooking(food_type):
-    link = 'https://www.allrecipes.com/search/results/?search={}'.format(food_type)
-
+def cooking(result):
+    if 'food' in result['Entities']:
+        food_type = result['Entities']['food']
+       
+    link = f'https://www.allrecipes.com/search/results/?search={food_type}'
     response = requests.get(link).text
     soup = BeautifulSoup(response , 'lxml')
+
     contents = soup.find_all('div',class_="component card card__recipe card__facetedSearchResult")
     
     links = []
@@ -25,15 +28,13 @@ def cooking(food_type):
         for recipe in recipes:
             title = recipe.find('h1',class_="headline heading-content elementFont__display").text
             ingrdients = recipe.find_all('span',class_="ingredients-item-name")
-        
-            #print('Title :',title)
+            
             speak(title)
             time.sleep(2.5)
-
             speak('The ingrdients are')
             time.sleep(1)
+
             for ingrdient in ingrdients:
-                #print(ingrdient.text)
                 speak(ingrdient.text)
                 time.sleep(2.5)
         
@@ -42,10 +43,8 @@ def cooking(food_type):
             speak('The steps are')
             time.sleep(1)
             for i in range(len(steps)):
-                #print(steps[i].text)
                 speak(steps[i].text)
                 time.sleep(1)
                 
-                #print(paragraph[i].text)
                 speak(paragraph[i].text)
                 time.sleep(3)
