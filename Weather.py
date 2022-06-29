@@ -5,10 +5,8 @@ api_key = "661d81f3b17f7764fba64a3b2e0118db"
 
 def weather(result):
     # Check if the user has provided a city name or not
-    city_name = '' 
-    
     if 'location' in result['Entities']:
-        city_name += result['Entities']['location']
+        city_name = result['Entities']['location']
     else:
         city_name = 'cairo'
     
