@@ -5,8 +5,8 @@ import os
 
 
 # Authentication
-url = 'https://api.au-syd.text-to-speech.watson.cloud.ibm.com/instances/24d0a33f-5602-46d7-b903-a163ba991ac9'
-apikey = 'kLBO4-I_XWGd3c8HrjLgzE-IcxIvGg_eWp0rbXK65myX'
+url = "https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/2d70c18d-130c-43a5-a760-288e792f47f8"
+apikey = "pppptGLuURckSoT5yY_rDN12MhAUWwm6mXVgI2-4of9w"
 
 #setup service
 authenticator = IAMAuthenticator(apikey)
@@ -14,8 +14,6 @@ authenticator = IAMAuthenticator(apikey)
 tts = TextToSpeechV1(authenticator=authenticator)
 #set service URL
 tts.set_service_url(url)
-
-
 
 num = 0
 def speak(output):
@@ -29,9 +27,8 @@ def speak(output):
         audio_file.write(res.content)    
         
     # for playing note.mp3 file
-    path = "./"
     pg.mixer.init()
-    sound = pg.mixer.Sound(path + file)
+    sound = pg.mixer.Sound(file)
     sound.play()
-    os.remove(path + file)          
+    os.remove(file)          
    
