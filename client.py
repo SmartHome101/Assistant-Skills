@@ -30,7 +30,7 @@ while True:
             message = recognizer.recognize_google(audio)
             print(message)
             # make a request to the server and get the response in json format then mapping the response to the function
-            response = requests.post(f'http://127.0.0.1:8000/predict?message={message}').json()
+            response = requests.post(f'http://nlp.techome.systems/predict?message={message}').json()
             if response['Intent'] in ['Cooking','News']:
                 speak(str(mapping[response['Intent']](response)))
                 time.sleep(10)
