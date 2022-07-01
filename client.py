@@ -20,23 +20,25 @@ mapping={
         } 
 
 while True:
-
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Say something!")
+        speak("Hi, I am Lemma personal assistant. How can I help you?")
         recognizer.adjust_for_ambient_noise(source, duration=0.2)
         audio = recognizer.listen(source)
-
-    # recognize speech using Google Speech Recognition
-        message = recognizer.recognize_google(audio)
-        print(message)
-
-    response = requests.post(f'http://127.0.0.1:8000/predict?message={message}').json()
-    #make a request to the server and get the response in json format then mapping the response to the function
-    speak(str(mapping[response['Intent']](response)))
-    time.sleep(5)
-
+        # recognize speech using Google Speech Recognition
+        try:
+            message = recognizer.recognize_google(audio)
+            print(message)
+            # make a request to the server and get the response in json format then mapping the response to the function
+            response = requests.post(f'http://127.0.0.1:8000/predict?message={message}').json()
+            if response['Intent'] in ['Cooking','News']:
+                speak(str(mapping[response['Intent']](response)))
+                time.sleep(10)
+            else:
+                speak(str(mapping[response['Intent']](response)))
+                time.sleep(3)
+        except:
+            print("sorry, could not recognise try again")
+            # try "continue"
     if response['Intent'] in ["Goodbye" , "Thanks"]:
                 break
-
-    time.sleep(10)
