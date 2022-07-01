@@ -18,12 +18,10 @@ def timezone(result):
         geolocator = Nominatim(user_agent="geoapiExercises")
         
         # getting Latitude and Longitude
-        location = geolocator.geocode(loca)
+        location = geolocator.geocode(loca) 
     
         # pass the Latitude and Longitude into a timezone_at and it return timezone
         obj = TimezoneFinder()
-        
-        # returns 'Europe/Berlin'
         res = obj.timezone_at(lng=location.longitude, lat=location.latitude)
         # get current time
         current_time = datetime.now(pytz.timezone(res)).strftime("%H:%M:%S")
@@ -74,7 +72,7 @@ def alarm(result):
             alarm_hour == now.hour and 
             alarm_minute == now.minute ):
 
-            playsound("alarm.wav")
+            playsound("alarm.mp3")
             break
 
 
