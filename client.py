@@ -31,7 +31,7 @@ while True:
             message = recognizer.recognize_google(audio)
             print(message)
             # wake up the assistant
-            if 'leon' in message.lower():  
+            if 'leo' in message.lower():  
                 speak("Hi, How can I help you?")
                 recognizer = sr.Recognizer()
                 with sr.Microphone() as source:
