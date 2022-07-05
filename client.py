@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import requests
+import re
 import json
 import time
 import Weather , News , IOT , Kitchen , Enterainment , Social , Productivity 
@@ -20,37 +21,27 @@ mapping={
         } 
 
 while True:
-    # obtain audio from the microphone
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
         try :
-            # recognize speech 
             recognizer.pause_threshold = .8
             audio = recognizer.listen(source)
-            message = recognizer.recognize_google(audio)
-            print(message)
-            # wake up the assistant
-            if 'leo' in message.lower():  
-                speak("Hi, How can I help you?")
-                recognizer = sr.Recognizer()
-                with sr.Microphone() as source:
-                    recognizer.adjust_for_ambient_noise(source)
-                    try:
-                        recognizer.pause_threshold = .8
-                        audio = recognizer.listen(source)
-                        message = recognizer.recognize_google(audio)
-                        print(message)
-                        #send a request to the server
-                        response = requests.post(f'http://nlp.techome.systems/predict?message={message}').json()
-                        if response['Intent'] in ['Cooking','News']:
-                            speak(str(mapping[response['Intent']](response)))
-                            time.sleep(10)
-                        else:
-                            speak(str(mapping[response['Intent']](response)))
-                            time.sleep(3)
-                    except:
-                        pass
+            sentence = recognizer.recognize_google(audio)
+            sentence = sentence.lower()
+            print(sentence)
+            if 'leo' in sentence:  
+                message = re.match('(.*)leo(.*)',sentence).group(2)
+                message = message.strip()
+                response = requests.post(f'http://nlp.techome.systems/predict?message={message}').json()
+                print(response)
+                if response['Intent'] in ['Cooking','News']:
+                        speak(str(mapping[response['Intent']](response)))
+                        time.sleep(10)
+                else:
+                    speak(str(mapping[response['Intent']](response)))
+                    time.sleep(3)
+                    
             else:
                 continue 
         except:
