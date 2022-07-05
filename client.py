@@ -4,15 +4,15 @@ import re
 import os
 import json
 import time
-import Weather , News , IOT , Kitchen , Enterainment , Social , Productivity 
+import Weather , News , IOT , Kitchen , Entertainment , Social , Productivity 
 from TTS import speak
 
 mapping={
         'Greeting'      : Social.Social,
         'Goodbye'       : Social.Social,
         'Thanks'        : Social.Social,
-        'Joke'          : Enterainment.joke,
-        'PlayMusic'     : Enterainment.play_music,
+        'Joke'          : Entertainment.joke,
+        'PlayMusic'     : Entertainment.play_music,
         'Cooking'       : Kitchen.cooking,
         'Weather'       : Weather.weather,
         'News'          : News.news,
