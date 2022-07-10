@@ -5,8 +5,8 @@ import os
 
 
 # Authentication
-url = "https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/2beae5d3-15a6-4f18-b188-a197fd17ec19"
-apikey = "06t1MYKgz0Uu1qaYCw7dwbiXMnuQRqhZITS57mTINIhB"
+url = "https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/7eb7a571-08b6-4fb9-acbd-b7dfd5f3002c"
+apikey = "U4O0CsB5mN_yXkgzYG6LHfQINK4Gh92jWojNCxXLjlPp"
 
 #setup service
 authenticator = IAMAuthenticator(apikey)
