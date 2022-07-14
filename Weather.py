@@ -1,8 +1,8 @@
-import requests
+import requests 
 from TTS import speak
 
-api_key = "661d81f3b17f7764fba64a3b2e0118db"
- 
+api_key = "661d81f3b17f7764fba64a3b2e0118db" 
+
 def weather(result):
     # Check if the user has provided a city name or not
     if 'location' in result['Entities']:
@@ -29,10 +29,13 @@ def weather(result):
             else :
                 speak(f"No, weather is {weather_describe}")
         else :
-            res = f"The weather forecast in {city} is {weather_describe} with a maximum of {max_temp} Celsius"
+            res = f"Currently in {city} it's {max_temp} degrees celsius with {weather_describe}"
             speak(res)
-            print(res)
             
         
     else:
         speak("There are error")
+
+
+
+
