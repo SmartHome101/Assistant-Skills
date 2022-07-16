@@ -36,8 +36,8 @@ def timezone(result):
         # Convert 12 hour format
         hour = current_time[:2]
         minute = current_time[3:5]
-        hour = hour - 12 if 12 < hour <= 24 else hour 
-        current_time = str(hour) + ':' + str(minute) 
+        hour = int(hour) - 12 if 12 < int(hour) <= 24 else int(hour) 
+        current_time = str(hour) + ':' + str(minute)
 
     # speak current time
     return(speak("The Current Time is" + current_time))
@@ -125,3 +125,6 @@ def productivity(result):
     elif 'alarm' in text:
         res = alarm(result)
     return res
+
+
+
