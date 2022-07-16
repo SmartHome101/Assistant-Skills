@@ -62,7 +62,8 @@ def smartHome(result):
         'window'  : device_0,
         'heating' : device_0,
         'heater'  : device_0, 
-        'curtain' : device_0
+        'curtain' : device_0,
+        'door'    : users_ref.update({'door':0})
             }  
 
     map_1 = {
@@ -71,20 +72,16 @@ def smartHome(result):
         'window'  : device_1,
         'heating' : device_1,
         'heater'  : device_1,
-        'curtain' : device_1
+        'curtain' : device_1,
+        'door'    : users_ref.update({'door':1})
             } 
-    
-    if 'door' in device:
-        if action == 'open':
-            res = users_ref.update({'door':1})
-            speak('ok, the door is open')
-        else:
-            res = users_ref.update({'door':0})
-            speak('ok, the door is closed')
 
-    elif action in ['on','up','open']:
+    if action in ['on','up','open']:
         if device in map_1.keys():
-            res =  map_1[device](result)
+            if 'door' in device:
+                res = map_1[device]
+            else:
+                res = map_1[device](result)
             
     elif action in ['low','medium','high']:
         if 'light' in device:
@@ -93,6 +90,9 @@ def smartHome(result):
 
     elif action in ['off','dim','down','close']:
         if device in map_0.keys():
-            res =  map_0[device](result)
+            if 'door' in device:
+                res = map_0[device]
+            else:
+                res = map_0[device](result)
 
     return res 
