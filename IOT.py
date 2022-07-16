@@ -10,7 +10,6 @@ firebase_admin.initialize_app(cred ,{'databaseURL': 'https://smart-home-2f967-de
 ref = db.reference('/')
 users_ref= ref.child('HOME01')
 
-
 """
 Actions => [On , Off , Down , Up , Dim , Open , Close , Medium , Low , High]
 Modes   => [Increase , Decrease]
@@ -69,8 +68,7 @@ def smartHome(result):
         'window'  : device_0,
         'heating' : device_0,
         'heater'  : device_0, 
-        'curtain' : device_0,
-        'door'    : users_ref.update({'door':0})
+        'curtain' : device_0
             }  
 
     map_1 = {
@@ -79,22 +77,29 @@ def smartHome(result):
         'window'  : device_1,
         'heating' : device_1,
         'heater'  : device_1,
-        'curtain' : device_1,
-        'door'    : users_ref.update({'door':0})
+        'curtain' : device_1
             } 
     
-    
-    if action in ['on','up','open']:
+    if 'door' in device:
+        if action == 'open':
+            res = users_ref.update({'door':1})
+            speak('ok, the door is open')
+        else:
+            res = users_ref.update({'door':0})
+            speak('ok, the door is closed')
+
+    elif action in ['on','up','open']:
         if device in map_1.keys():
             res =  map_1[device](result)
             
     elif action in ['low','medium','high']:
         if 'light' in device:
-            res = users_ref.update({f'bedroom/on-off/light/mode':{action}})
+            res = users_ref.update({'bedroom/light/mode':action})
+            speak(f"ok,the light is set to {action}")
 
     elif action in ['off','dim','down','close']:
         if device in map_0.keys():
             res =  map_0[device](result)
 
-    return res
-   
+    return res 
+
