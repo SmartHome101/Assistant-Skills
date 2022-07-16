@@ -4,7 +4,6 @@ import time
 from TTS import speak
 
 
-    
 def cooking(result):
     if 'food' in result['Entities']:
         food_type = result['Entities']['food']
@@ -30,21 +29,16 @@ def cooking(result):
             ingrdients = recipe.find_all('span',class_="ingredients-item-name")
             
             speak(title)
-            time.sleep(2.5)
             speak('The ingrdients are')
-            time.sleep(1)
 
             for ingrdient in ingrdients:
                 speak(ingrdient.text)
-                time.sleep(2.5)
-        
+
             steps = recipe.find_all('span',class_="checkbox-list-text")
             paragraph = recipe.find_all('div',class_="paragraph")
             speak('The steps are')
-            time.sleep(1)
+
             for i in range(len(steps)):
                 speak(steps[i].text)
-                time.sleep(1)
-                
                 speak(paragraph[i].text)
-                time.sleep(3)
+

@@ -4,7 +4,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-
 cred = credentials.Certificate('serviceAccount.json')
 firebase_admin.initialize_app(cred ,{'databaseURL': 'https://smart-home-2f967-default-rtdb.firebaseio.com/'})
 ref = db.reference('/')
@@ -16,23 +15,18 @@ Modes   => [Increase , Decrease]
 Rooms   => [Living room , Bedroom , Bathroom , Kitchen , Garage , Reception]
 Devices => [Light , Heating , Curtain , Window , Door , Fan]
 """
-
-
 # Ask about a room if the user doesn't mention it
 def is_room(result):
     if 'room' not in result['Entities'] :
         speak('What is the room')    
-        
         recognizer = sr.Recognizer()
         with sr.Microphone() as source:
             recognizer.adjust_for_ambient_noise(source, duration=0.1)
             audio = recognizer.listen(source)
-            ans = recognizer.recognize_google(audio)
-            
+            ans = recognizer.recognize_google(audio)       
         room = ans
     else:    
         room = result['Entities']['room']
-        
     return room
 
 # Take a result "Entities" and execute an action
@@ -102,4 +96,3 @@ def smartHome(result):
             res =  map_0[device](result)
 
     return res 
-
