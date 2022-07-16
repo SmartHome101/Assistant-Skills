@@ -35,9 +35,7 @@ def fetch_news(topic=None):
         summary = list(dict.fromkeys(summaries))[i+1].text.strip()
 
         speak('the title is '+ title)
-        time.sleep(3)
         speak('the sammary of this' + summary)
-        time.sleep(7)
 # Define the function to fetch the news from the BBC website and return the news based on the region like [Africa , Aisa , Europe]
 def fetch_news_by_region(region):
     
@@ -55,9 +53,7 @@ def fetch_news_by_region(region):
         summary = list(dict.fromkeys(summaries))[i+1].text.strip()
 
         speak('the title is '+ title)
-        time.sleep(3)
         speak('the sammary of this' + summary)
-        time.sleep(7)
         
         
 def fetch_sports_news():
@@ -76,9 +72,7 @@ def fetch_sports_news():
         summary = list(dict.fromkeys(summaries))[i+1].text.strip()
 
         speak('the title is '+ title)
-        time.sleep(3)
         speak('the sammary of this' + summary)
-        time.sleep(7)
 
 # Final Function to fetch the news from the BBC website and return the news based on the topic like [Sport , Science , Technology , Business , Climate , Health , News around the World]
 def news(result):
