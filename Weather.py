@@ -8,7 +8,7 @@ def weather(result):
     if 'location' in result['Entities']:
         city = result['Entities']['location']
     else:
-        city = 'cairo'
+        city = 'zagazig'
 
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city,api_key)
     response = requests.get(url)

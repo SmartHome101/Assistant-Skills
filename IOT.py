@@ -82,17 +82,17 @@ def smartHome(result):
                 res = map_1[device]
             else:
                 res = map_1[device](result)
-            
-    elif action in ['low','medium','high']:
+                
+    if action in ['low','medium','high']:
         if 'light' in device:
             res = users_ref.update({'bedroom/light/mode':action})
             speak(f"ok,the light is set to {action}")
 
-    elif action in ['off','dim','down','close']:
+    if action in ['off','dim','down','close']:
         if device in map_0.keys():
             if 'door' in device:
                 res = map_0[device]
             else:
                 res = map_0[device](result)
 
-    return res 
+    return res  	
